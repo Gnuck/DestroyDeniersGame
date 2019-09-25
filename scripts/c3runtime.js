@@ -800,6 +800,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Behaviors.Pin.Acts.Pin,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
+		C3.Behaviors.Timer.Acts.PauseResumeTimer,
 		C3.Plugins.System.Exps.random,
 		C3.Plugins.Sprite.Acts.SetFlipped,
 		C3.Plugins.Sprite.Acts.SetVisible,
@@ -1093,18 +1094,23 @@ self.C3_JsPropNameTable = [
 		() => -5,
 		() => "Platforms",
 		() => "nametag",
-		() => 1.5,
-		() => 0.3,
+		() => "royNameTag",
+		() => 0.2,
 		() => "TedCruz",
+		() => "tedcruzNameTag",
 		() => "Trump",
 		() => "Characters",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0, 2);
 		},
+		() => "trumpNameTag",
 		() => "Mitch",
+		() => "mitchNameTag",
 		() => "JimInhofe",
+		() => "jimNameTag",
 		() => "MarcoRubio",
+		() => "rubioNameTag",
 		() => "Checkpoint",
 		() => 172,
 		() => 45,
@@ -1154,14 +1160,14 @@ self.C3_JsPropNameTable = [
 		() => -2,
 		() => "theme",
 		() => 5,
+		() => 50,
 		() => 40,
 		() => "https://act.nrdc.org/letter/climate-action-190528?source=WBSCLIPET&_ga=2.268940785.1658644004.1568915059-710825981.1568915059",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 1);
 		},
-		() => "Layer 1",
-		() => 50
+		() => "Layer 1"
 	];
 }
 
