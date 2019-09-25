@@ -1160,7 +1160,8 @@ self.C3_JsPropNameTable = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 1);
 		},
-		() => "Layer 1"
+		() => "Layer 1",
+		() => 50
 	];
 }
 
