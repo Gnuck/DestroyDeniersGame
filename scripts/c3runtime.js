@@ -617,6 +617,18 @@ self["C3_Shaders"] = {};
 
 "use strict";C3.Plugins.Text.Exps={Text(){return this._text},PlainText(){return this._enableBBcode?C3.BBString.StripAnyTags(this._text):this._text},FaceName(){return this._faceName},FaceSize(){return this._ptSize},TextWidth(){return this._UpdateTextSize(),this._webglText.GetTextWidth()},TextHeight(){return this._UpdateTextSize(),this._webglText.GetTextHeight()},LineHeight(){return this._lineHeightOffset}};
 
+"use strict";C3.Plugins.Share=class extends C3.SDKPluginBase{constructor(a){super(a)}Release(){super.Release()}};
+
+"use strict";C3.Plugins.Share.Type=class extends C3.SDKTypeBase{constructor(a){super(a)}Release(){super.Release()}OnCreate(){}};
+
+"use strict";{C3.Plugins.Share.Instance=class extends C3.SDKInstanceBase{constructor(a){super(a,"share"),this._isSupported=!1,this._isFilesSupported=!1,this._files=[],this.AddDOMMessageHandlers([["share-completed",()=>this._OnShareCompleted()],["share-failed",()=>this._OnShareFailed()]]),this._runtime.AddLoadPromise(this.PostToDOMAsync("init").then((a)=>{this._isFilesSupported=a["isFilesSupported"],this._isSupported=a["isSupported"]}))}_OnShareCompleted(){this.Trigger(C3.Plugins.Share.Cnds.OnShareCompleted)}_OnShareFailed(){this.Trigger(C3.Plugins.Share.Cnds.OnShareFailed)}}}
+
+"use strict";C3.Plugins.Share.Cnds={IsSupported(){return this._isSupported},IsSharingFilesSupported(){return this._isFilesSupported},OnShareCompleted(){return!0},OnShareFailed(){return!0}};
+
+"use strict";C3.Plugins.Share.Acts={Share(a,b,c){this._isSupported&&(this._PostToDOMMaybeSync("share",{"text":a,"title":b,"url":c,"files":this._files}),C3.clearArray(this._files))},AddFile(a,b,c){if(this._isFilesSupported&&c){const d=c.GetFirstPicked(this._inst);if(d){const c=d.GetSdkInstance().GetArrayBufferReadOnly();if(0!==c.byteLength){const d=self["RealFile"]||self["File"],e=new d([c],a,{"type":b});this._files.push(e)}}}}};
+
+"use strict";C3.Plugins.Share.Exps={};
+
 "use strict";C3.Behaviors.Tween=class extends C3.SDKBehaviorBase{constructor(a){super(a)}Release(){super.Release()}};
 
 "use strict";C3.Behaviors.Tween.Type=class extends C3.SDKBehaviorTypeBase{constructor(a){super(a)}Release(){super.Release()}OnCreate(){}};
@@ -746,9 +758,11 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Button,
 		C3.Plugins.Text,
 		C3.Behaviors.scrollto,
-		C3.Plugins.System.Cnds.OnResume,
+		C3.Plugins.Share,
+		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.PlatformInfo.Cnds.IsOnMobile,
 		C3.Plugins.Browser.Acts.RequestFullScreen,
+		C3.Plugins.System.Cnds.OnResume,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.Audio.Acts.Stop,
@@ -781,17 +795,13 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.System.Acts.GoToLayout,
 		C3.Behaviors.Tween.Acts.TweenOneProperty,
-		C3.Plugins.Sprite.Cnds.OnCreated,
-		C3.Behaviors.Timer.Acts.StartTimer,
-		C3.Behaviors.Timer.Cnds.OnTimer,
-		C3.Plugins.Sprite.Cnds.OnAnimFinished,
 		C3.Plugins.Sprite.Cnds.OnCollision,
 		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.Sprite.Cnds.PickByUID,
 		C3.Plugins.Sprite.Acts.Destroy,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
-		C3.Behaviors.Bullet.Acts.SetAngleOfMotion,
+		C3.Plugins.Sprite.Cnds.OnCreated,
 		C3.Plugins.Sprite.Cnds.CompareY,
 		C3.Plugins.Sprite.Acts.SetCollisions,
 		C3.Behaviors.Platform.Acts.SetVectorY,
@@ -799,19 +809,22 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Behaviors.Pin.Acts.Pin,
+		C3.Behaviors.Timer.Acts.StartTimer,
 		C3.Plugins.Sprite.Cnds.IsOnScreen,
 		C3.Behaviors.Timer.Acts.PauseResumeTimer,
+		C3.Behaviors.Timer.Cnds.OnTimer,
+		C3.Plugins.Sprite.Cnds.OnAnimFinished,
+		C3.Behaviors.Bullet.Acts.SetAngleOfMotion,
 		C3.Plugins.System.Exps.random,
 		C3.Plugins.Sprite.Acts.SetFlipped,
 		C3.Plugins.Sprite.Acts.SetVisible,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.Browser.Cnds.IsPortraitLandscape,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
-		C3.Plugins.Touch.Cnds.OnTouchEnd,
-		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.Browser.Acts.GoToURL,
 		C3.Plugins.Sprite.Acts.SetAnimFrame,
 		C3.Plugins.Sprite.Exps.AnimationFrame,
+		C3.Plugins.Touch.Cnds.OnTouchEnd,
 		C3.Plugins.Sprite.Cnds.CompareFrame,
 		C3.Plugins.System.Cnds.OnLayoutEnd
 	];
@@ -882,6 +895,15 @@ self.C3_JsPropNameTable = [
 	{Smog: 0},
 	{Fire: 0},
 	{cloudEnemy: 0},
+	{Bolsonaro: 0},
+	{bolsonaroNameTag: 0},
+	{Hurricane: 0},
+	{Koch: 0},
+	{kochNameTag: 0},
+	{lomberg: 0},
+	{lombergNameTag: 0},
+	{mikepence: 0},
+	{penceNameTag: 0},
 	{checkpoint1: 0},
 	{checkpoint2: 0},
 	{checkpoint3: 0},
@@ -918,6 +940,7 @@ self.C3_JsPropNameTable = [
 	{Sprite: 0},
 	{Sprite5: 0},
 	{Sprite6: 0},
+	{Share: 0},
 	{totalTime: 0},
 	{isPlaying: 0},
 	{bgHealth: 0},
@@ -1064,27 +1087,22 @@ self.C3_JsPropNameTable = [
 		() => "Background Change",
 		() => 100,
 		() => "Enemy Functions",
-		() => "Cloud",
-		() => 3,
-		() => "lightning",
+		() => "Hurricane",
 		() => 150,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject();
 		},
+		() => 3,
 		() => 151,
 		() => 4,
 		() => 152,
 		() => 6,
-		() => 210,
-		() => 7,
-		() => 8,
 		() => 153,
-		() => "Fire",
-		() => "Smog",
-		() => 90,
-		() => -90,
-		() => "RoyBlunt",
+		() => 7,
+		() => 210,
+		() => 8,
+		() => "Pence",
 		() => -700,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -1094,8 +1112,22 @@ self.C3_JsPropNameTable = [
 		() => -5,
 		() => "Platforms",
 		() => "nametag",
-		() => "royNameTag",
+		() => "penceNameTag",
 		() => 0.2,
+		() => "Lomberg",
+		() => "lombergNameTag",
+		() => "Koch",
+		() => "kochNameTag",
+		() => "Bolsonaro",
+		() => "bolsonaroNameTag",
+		() => "Cloud",
+		() => "lightning",
+		() => "Fire",
+		() => "Smog",
+		() => 90,
+		() => -90,
+		() => "RoyBlunt",
+		() => "royNameTag",
 		() => "TedCruz",
 		() => "tedcruzNameTag",
 		() => "Trump",
