@@ -759,7 +759,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text,
 		C3.Behaviors.scrollto,
 		C3.Plugins.Share,
-		C3.Plugins.Touch.Cnds.OnTouchStart,
+		C3.Plugins.Touch.Cnds.OnTouchEnd,
 		C3.Plugins.PlatformInfo.Cnds.IsOnMobile,
 		C3.Plugins.Browser.Acts.RequestFullScreen,
 		C3.Plugins.System.Cnds.OnResume,
@@ -821,10 +821,10 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.Browser.Cnds.IsPortraitLandscape,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
+		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.Browser.Acts.GoToURL,
 		C3.Plugins.Sprite.Acts.SetAnimFrame,
 		C3.Plugins.Sprite.Exps.AnimationFrame,
-		C3.Plugins.Touch.Cnds.OnTouchEnd,
 		C3.Plugins.Sprite.Cnds.CompareFrame,
 		C3.Plugins.System.Cnds.OnLayoutEnd
 	];
