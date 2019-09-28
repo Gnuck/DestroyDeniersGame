@@ -799,6 +799,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.Sprite.Cnds.PickByUID,
 		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Behaviors.Platform.Acts.SetDefaultControls,
+		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Plugins.Sprite.Cnds.OnCreated,
@@ -806,7 +808,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetCollisions,
 		C3.Behaviors.Platform.Acts.SetVectorY,
 		C3.Behaviors.Platform.Acts.SetEnabled,
-		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Behaviors.Pin.Acts.Pin,
 		C3.Behaviors.Timer.Acts.StartTimer,
@@ -823,6 +824,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.Browser.Acts.GoToURL,
+		C3.Plugins.Share.Acts.Share,
 		C3.Plugins.Sprite.Acts.SetAnimFrame,
 		C3.Plugins.Sprite.Exps.AnimationFrame,
 		C3.Plugins.Sprite.Cnds.CompareFrame,
@@ -878,6 +880,8 @@ self.C3_JsPropNameTable = [
 	{colonTime: 0},
 	{TryAgainBtn: 0},
 	{petitionButton: 0},
+	{ShareBtn: 0},
+	{shareButtonTry: 0},
 	{Patrol: 0},
 	{JimInhofe: 0},
 	{MarcoRubio: 0},
@@ -941,6 +945,8 @@ self.C3_JsPropNameTable = [
 	{Sprite5: 0},
 	{Sprite6: 0},
 	{Share: 0},
+	{EndCamera: 0},
+	{EndCutscene: 0},
 	{totalTime: 0},
 	{isPlaying: 0},
 	{bgHealth: 0},
@@ -948,7 +954,9 @@ self.C3_JsPropNameTable = [
 	{life: 0},
 	{Boss: 0},
 	{firstPlay: 0},
-	{returnTime: 0}
+	{returnTime: 0},
+	{cutscene: 0},
+	{deadTime: 0}
 ];
 
 "use strict";
@@ -1067,6 +1075,11 @@ self.C3_JsPropNameTable = [
 			const n3 = p._GetNode(3);
 			return () => C3.lerp(n0.ExpObject(), f1((n2.ExpObject() + 300), (n3.ExpObject() + 400)), 0.1);
 		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => C3.lerp(n0.ExpObject(), n1.ExpObject(), 0.1);
+		},
 		() => "Run",
 		() => "Idle",
 		() => "Jump",
@@ -1098,16 +1111,16 @@ self.C3_JsPropNameTable = [
 		() => 4,
 		() => 152,
 		() => 6,
-		() => 153,
-		() => 7,
 		() => 210,
+		() => 7,
 		() => 8,
-		() => "Pence",
-		() => -700,
+		() => 153,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
 		},
+		() => "Pence",
+		() => -700,
 		() => "Death",
 		() => -5,
 		() => "Platforms",
@@ -1187,14 +1200,20 @@ self.C3_JsPropNameTable = [
 		() => 248,
 		() => 249,
 		() => 194,
+		() => "theme",
 		() => 23,
 		() => 24,
 		() => -2,
-		() => "theme",
 		() => 5,
 		() => 50,
 		() => 40,
 		() => "https://act.nrdc.org/letter/climate-action-190528?source=WBSCLIPET&_ga=2.268940785.1658644004.1568915059-710825981.1568915059",
+		() => "Run For Our Lives: Destroy the Deniers",
+		() => "https://destroythedeniers",
+		() => 275,
+		() => 340,
+		() => 575,
+		() => 425,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 1);
